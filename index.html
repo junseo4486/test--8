@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 통학 안전 제보 게시판</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>학생 통학 안전 제보</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-tab="reports">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    제보 현황
+                </button>
+                <button class="nav-btn" data-tab="assistance">
+                    <i class="fas fa-hands-helping"></i>
+                    민원 도움
+                </button>
+                <button class="nav-btn" data-tab="best-practices">
+                    <i class="fas fa-trophy"></i>
+                    우수 사례
+                </button>
+                <button class="nav-btn" data-tab="resources">
+                    <i class="fas fa-link"></i>
+                    공식 신고처
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Correction Notice -->
+    <div id="correction-notice" class="correction-notice hidden">
+        <div class="container">
+            <div class="notice-content">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>정정 공지사항이 표시됩니다.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Reports Tab -->
+            <div id="reports-tab" class="tab-content active">
+                <div class="controls">
+                    <div class="filters">
+                        <select id="category-filter">
+                            <option value="all">전체 카테고리</option>
+                            <option value="safety">안전</option>
+                            <option value="transport">교통</option>
+                            <option value="infrastructure">시설</option>
+                            <option value="other">기타</option>
+                        </select>
+                        <select id="sort-filter">
+                            <option value="likes">공감순</option>
+                            <option value="latest">최신순</option>
+                            <option value="comments">댓글순</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="reports-container" class="reports-grid">
+                    <!-- Reports will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Assistance Tab -->
+            <div id="assistance-tab" class="tab-content">
+                <div class="assistance-info">
+                    <h2>민원 접수 도움</h2>
+                    <p>복잡한 민원이나 신고가 어려운 경우, 아래 양식을 작성하시면 도움을 드립니다.</p>
+                    
+                    <form id="assistance-form" class="assistance-form">
+                        <div class="form-group">
+                            <label for="case-title">사건 제목</label>
+                            <input type="text" id="case-title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="case-description">상세 설명</label>
+                            <textarea id="case-description" name="description" rows="5" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="applicant-name">신청자명</label>
+                            <input type="text" id="applicant-name" name="applicant" required>
+                        </div>
+                        <button type="submit" class="btn-primary">민원 도움 요청</button>
+                    </form>
+                </div>
+
+                <div id="assistance-cases" class="assistance-cases">
+                    <h3>처리 현황</h3>
+                    <div id="cases-container">
+                        <!-- Assistance cases will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Best Practices Tab -->
+            <div id="best-practices-tab" class="tab-content">
+                <h2>우수 해결 사례</h2>
+                <p>높은 공감을 받고 성공적으로 해결된 사례들입니다.</p>
+                <div id="best-practices-container" class="best-practices-grid">
+                    <!-- Best practices will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Resources Tab -->
+            <div id="resources-tab" class="tab-content">
+                <div class="resources-grid">
+                    <div class="resource-section">
+                        <h2>공식 신고 사이트</h2>
+                        <div id="official-links" class="links-grid">
+                            <!-- Official links will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="resource-section">
+                        <h2>통학 안전 가이드</h2>
+                        <div class="guide-content">
+                            <div class="guide-item">
+                                <h3>안전한 통학로 이용하기</h3>
+                                <ul>
+                                    <li>지정된 통학로를 이용하세요</li>
+                                    <li>횡단보도에서는 좌우를 확인하세요</li>
+                                    <li>야간에는 밝은 색 옷을 착용하세요</li>
+                                </ul>
+                            </div>
+                            <div class="guide-item">
+                                <h3>위험 상황 신고 방법</h3>
+                                <ul>
+                                    <li>즉시 안전한 곳으로 피하세요</li>
+                                    <li>상황을 사진으로 기록하세요</li>
+                                    <li>구체적인 위치와 시간을 메모하세요</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button -->
+    <button id="fab-report" class="fab">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Report Modal -->
+    <div id="report-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>새 제보 작성</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="report-form" class="report-form">
+                <div class="form-group">
+                    <label for="report-title">제목 *</label>
+                    <input type="text" id="report-title" name="title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="report-category">카테고리 *</label>
+                    <select id="report-category" name="category" required>
+                        <option value="">카테고리를 선택하세요</option>
+                        <option value="safety">안전</option>
+                        <option value="transport">교통</option>
+                        <option value="infrastructure">시설</option>
+                        <option value="other">기타</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="report-location">위치</label>
+                    <input type="text" id="report-location" name="location" placeholder="정확한 위치를 입력하세요">
+                </div>
+                
+                <div class="form-group">
+                    <label for="report-description">내용 *</label>
+                    <textarea id="report-description" name="description" rows="5" required placeholder="문제 상황을 자세히 설명해 주세요"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="report-images">이미지 첨부</label>
+                    <div class="file-upload">
+                        <input type="file" id="report-images" name="images" multiple accept="image/*">
+                        <div class="upload-area">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>클릭하거나 파일을 드래그하세요</p>
+                            <small>JPG, PNG 파일만 가능 (최대 5MB, 5개)</small>
+                        </div>
+                        <div id="image-preview" class="image-preview"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="anonymous" name="isAnonymous" checked>
+                        익명으로 제보하기
+                    </label>
+                </div>
+                
+                <div class="form-group" id="reporter-group" style="display: none;">
+                    <label for="reporter-name">신고자명</label>
+                    <input type="text" id="reporter-name" name="reporter">
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancel-report">취소</button>
+                    <button type="submit" class="btn-primary">제보하기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Comment Modal -->
+    <div id="comment-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>댓글</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div id="comments-container" class="comments-container">
+                <!-- Comments will be loaded here -->
+            </div>
+            <form id="comment-form" class="comment-form">
+                <input type="hidden" id="comment-report-id">
+                <div class="form-group">
+                    <input type="text" id="comment-content" placeholder="댓글을 입력하세요..." required>
+                    <button type="submit" class="btn-primary">등록</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
